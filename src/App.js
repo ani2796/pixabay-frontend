@@ -9,6 +9,8 @@ function isEmpty(obj) {
   return true;
 }
 
+const RESULTS_PER_PAGE = 50;
+
 const Header = ({ onInputChange, onSearchClick }) => {
   return (
   <div className="searchBar">
@@ -28,21 +30,29 @@ const ResultsDisplay = ({ results }) => {
 
   if(isEmpty(results)) return null;
 
-  // console.log("results: ", results);
-
   return(
-    <div>
+    <div className="imgContainer">
       {results.map(img => 
-        <div>
-          <img
-            id={img.id}
-            src={img.previewURL}
-            alt="Result"
-          />
-        </div>
+        <img  
+          className="imgTag"
+          key={img.id}
+          src={img.previewURL}
+          alt="Result"
+        />
       )}
     </div>
   )
+}
+
+const Footer = ({ currentPage, onLeftClick, onRightClick }) => {
+  if(currentPage === 0) return null;
+  return (
+    <div>
+      <button onClick={onLeftClick}>Left</button>
+       {currentPage} 
+      <button onClick={onRightClick}>Right</button>
+    </div>
+  );
 }
 
 function App() {
@@ -50,28 +60,37 @@ function App() {
 
   const [ searchText, setSearchText ] = useState("");
   const [ searchResult, setSearchResult ] = useState([]);
+  const [ currentPage, setCurrentPage ] = useState(0);
 
-  const search = () => {
-    // Hit an API
-    // Parse the returned data
+  const search = (page = 1) => {
     const params = {
       q: encodeURIComponent(searchText),
-      page: 1,
+      page,
       per_page: 30,
     }
-    const url = buildUrl(params);
-    const imgData = getImgData(url).then(result => {
-      const resultData = result.data.hits;
-      console.log("data in App: ", resultData);
-      setSearchResult(resultData);
-    });
-    // console.log("Setting search result to: ", imgData);
-    // setSearchResult(getImgData(url));
 
+    const url = buildUrl(params);
+    getImgData(url).then(result => {
+      const resultData = result.data.hits;
+
+      if(result.data.hits.length !== 0) {
+        setCurrentPage(page);
+        setSearchResult(resultData);
+      }
+    });
+  }
+  
+  const decrementPage = () => {
+    console.log("decrement page");
+    const newPage = Math.max(currentPage-1, 1);
+    search(newPage);
   }
 
-  // console.log("Search text: ", searchText);
-  
+  const incrementPage = () => {
+    const newPage = Math.min(currentPage+1, 10);
+    search(newPage);
+  }
+
   return (
     <div className="App">
       <Header
@@ -80,6 +99,11 @@ function App() {
       />
       <ResultsDisplay
         results={searchResult}
+      />
+      <Footer 
+        currentPage={currentPage}
+        onLeftClick={decrementPage}
+        onRightClick={incrementPage}
       />
     </div>
   );

@@ -1,0 +1,15 @@
+.imgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.imgTag {
+    margin: 5px;
+    height: 150px;
+    width: 150px;
+    object-fit: fill;
+}
