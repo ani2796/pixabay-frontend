@@ -32,4 +32,11 @@ const getImgData = (url) => {
     });
 }
 
-export { buildUrl, getImgData };
+const getSingleImgData = (url) => {
+    const img = axios.get(url).then(result => {
+        console.log("Getting single image", result);
+    })
+    return img;
+}
+
+export { buildUrl, getImgData, getSingleImgData };

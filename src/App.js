@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { buildUrl, getImgData } from "./network";
+import { Link } from "react-router-dom";
 
 function isEmpty(obj) {
   for(var prop in obj) {
@@ -8,8 +9,6 @@ function isEmpty(obj) {
   }
   return true;
 }
-
-const RESULTS_PER_PAGE = 50;
 
 const Header = ({ onInputChange, onSearchClick }) => {
   return (
@@ -32,14 +31,19 @@ const ResultsDisplay = ({ results }) => {
 
   return(
     <div className="imgContainer">
-      {results.map(img => 
-        <img  
-          className="imgTag"
-          key={img.id}
-          src={img.previewURL}
-          alt="Result"
-        />
-      )}
+      {results.map(img => {
+        {/* const url = `img/${img.id}`.toString(); */}
+        {/* console.log("img id: ", `img/${img.id}`); */}
+
+        return (<Link to="img">
+          <img 
+            className="imgTag"
+            key={img.id}
+            src={img.previewURL}
+            alt="Result"
+          />
+        </Link>);
+      })}
     </div>
   )
 }
