@@ -32,10 +32,13 @@ const getImgData = (url) => {
     });
 }
 
-const getSingleImgData = (url) => {
-    const img = axios.get(url).then(result => {
+const getSingleImgData = ({params}) => {
+    console.log("Params: ", params);
+    console.log("img id: ", params.imgId);
+    const img = axios.get(`${buildUrl()}&id=${params.imgId}`).then(result => {
         console.log("Getting single image", result);
-    })
+        return result;
+    });
     return img;
 }
 

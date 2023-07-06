@@ -17,8 +17,9 @@ const router = createBrowserRouter([
     element: <App></App>
   },
   {
-    path: "/img",
+    path: "/img/:imgId",
     element: <Img></Img>,
+    loader: getSingleImgData,
   },
 ]);
 

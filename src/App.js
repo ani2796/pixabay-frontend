@@ -32,17 +32,16 @@ const ResultsDisplay = ({ results }) => {
   return(
     <div className="imgContainer">
       {results.map(img => {
-        {/* const url = `img/${img.id}`.toString(); */}
-        {/* console.log("img id: ", `img/${img.id}`); */}
 
-        return (<Link to="img">
-          <img 
-            className="imgTag"
-            key={img.id}
-            src={img.previewURL}
-            alt="Result"
-          />
-        </Link>);
+        return (
+          <Link to={`img/${img.id}`}>
+            <img 
+              className="imgTag"
+              key={img.id}
+              src={img.previewURL}
+              alt="Result"
+            />
+          </Link>);
       })}
     </div>
   )
