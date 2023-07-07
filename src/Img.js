@@ -1,8 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 
 const Img = () => {
     const data = useLoaderData().data.hits[0];
-    console.log("Image data in img", data);
+    // console.log("Image data in img", data);
+    // const navigate = useNavigate();
+    const searchParams = useLocation();
+    // console.log("url states: ", searchParams);
 
     return(
         <div>
@@ -14,6 +17,14 @@ const Img = () => {
             <img 
                 src={data.userImageURL}
             />
+            <Link
+                to={"/"}
+                state={ searchParams }
+            >
+                <button>
+                    Back
+                </button>
+            </Link>
         </div>
     );
 }

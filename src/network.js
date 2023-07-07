@@ -7,8 +7,7 @@ const buildUrl = (params = {}) => {
     for(const key in params) {
         url = url.concat(`&${key}=${params[key]}`);
     }
-
-    console.log("built query: ", url);
+    // console.log("built query: ", url);
     return(url);
 }
 
@@ -27,16 +26,16 @@ const getImgData = (url) => {
     return axios.get(url)
     .then(result => filterImgData(result))
     .catch(error => {
-        console.log("Could not get img data...", error);
+        // console.log("Could not get img data...", error);
         return {};
     });
 }
 
 const getSingleImgData = ({params}) => {
     console.log("Params: ", params);
-    console.log("img id: ", params.imgId);
+    // console.log("img id: ", params.imgId);
     const img = axios.get(`${buildUrl()}&id=${params.imgId}`).then(result => {
-        console.log("Getting single image", result);
+        // console.log("Getting single image", result);
         return result;
     });
     return img;

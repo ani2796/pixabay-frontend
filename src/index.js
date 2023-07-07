@@ -8,7 +8,6 @@ import { getSingleImgData } from './network';
 import {
   createBrowserRouter,
   RouterProvider,
-  useLoaderData,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
