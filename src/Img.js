@@ -14,6 +14,7 @@ const Img = () => {
                 src={data.largeImageURL}
                 alt="Full image"
             />
+            Tags: [{data.tags}]
             <div className="userProfile">
                 <div>{data.user}</div>
                 <img 

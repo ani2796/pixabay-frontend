@@ -44,7 +44,6 @@
     align-items: center;
 }
 
-
 .imageDisplay {
     display: flex;
     flex-direction: column;
@@ -53,7 +52,11 @@
     padding: 10px;
 }
 
-.uploaderProfile {
+.userProfile {
+    border: 1px groove black;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
