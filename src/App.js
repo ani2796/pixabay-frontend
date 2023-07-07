@@ -2,19 +2,12 @@ import { useEffect, useState } from "react";
 import { buildUrl, getImgData } from "./network";
 import { Link, useLocation } from "react-router-dom";
 
-function isEmpty(obj) {
-  for(var prop in obj) {
-    if(obj.hasOwnProperty(prop))
-      return false;
-  }
-  return true;
-}
-
 const Header = ({ inputText, onInputChange, onSearchClick }) => {
   return (
-  <div className="searchBar">
+  <div className="header">
     <h2>Pixabay Search Bar</h2>
     <input 
+      className="searchInput"
       onChange={e => onInputChange(e.target.value)}
       placeholder={"Enter search here..."}
       value={inputText}
@@ -28,9 +21,12 @@ const Header = ({ inputText, onInputChange, onSearchClick }) => {
 
 const ResultsDisplay = ({ results, searchText, currentPage }) => {
 
-  if(isEmpty(results)) return null;
-
-  // console.log("searchText: ", searchText);
+  if(results.length === 0) 
+    return(
+      <div className="emptyResults">
+        No Results
+      </div>
+    );
 
   return(
     <div className="imgContainer">
@@ -52,23 +48,21 @@ const ResultsDisplay = ({ results, searchText, currentPage }) => {
 }
 
 const Footer = ({ currentPage, toDisplay, onLeftClick, onRightClick }) => {
+
   if(!toDisplay) return null;
 
   return (
-    <div>
+    <div class="footer">
       <button onClick={onLeftClick}>Left</button>
-       {"  " + currentPage + "  "} 
+       <div className="pageNumber">{"  " + currentPage + "  "}</div>
       <button onClick={onRightClick}>Right</button>
     </div>
   );
 }
 
 function App() {
-  console.log("Rendering Main App");
+  // console.log("Rendering Main App");
 
-  let defaultSearchText = "";
-  let defaultPage = 1;
-  let toSearch = false;
   const searchParams = useLocation();
 
   useEffect(() => {
@@ -76,17 +70,19 @@ function App() {
       // console.log("search params: ", searchParams.state.state.currentPage, searchParams.state.state.searchText);
       // console.log(searchParams.state.state);
       
-      defaultSearchText = searchParams.state.state.searchText;
-      defaultPage = searchParams.state.state.currentPage;
+      let defaultSearchText = searchParams.state.state.searchText;
+      let defaultPage = searchParams.state.state.currentPage;
+
       setSearchText(defaultSearchText);
       setCurrentPage(defaultPage);
+
       search(defaultPage, defaultSearchText);
     }
   }, []);
 
-  const [ searchText, setSearchText ] = useState(defaultSearchText);
+  const [ searchText, setSearchText ] = useState("");
   const [ searchResult, setSearchResult ] = useState([]);
-  const [ currentPage, setCurrentPage ] = useState(defaultPage);
+  const [ currentPage, setCurrentPage ] = useState(1);
   
 
   const search = (page = 1, sText = searchText) => {
@@ -97,8 +93,9 @@ function App() {
     }
 
     const url = buildUrl(params);
-    console.log("URL: ", url);
+    
     getImgData(url).then(result => {
+
       const resultData = result.data.hits;
 
       if(result.data.hits.length !== 0) {
@@ -108,11 +105,11 @@ function App() {
         setCurrentPage(1);
         setSearchResult([]);
       }
+
     });
   }
   
   const decrementPage = () => {
-    // console.log("decrement page");
     const newPage = Math.max(currentPage-1, 1);
     search(newPage);
   }

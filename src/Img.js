@@ -8,15 +8,20 @@ const Img = () => {
     // console.log("url states: ", searchParams);
 
     return(
-        <div>
-            <img
+        <div className="imageDisplay">
+            <img 
+                className="imageDiv"
                 src={data.largeImageURL}
                 alt="Full image"
             />
-            <p>Original uploader: {data.user}</p>
-            <img 
-                src={data.userImageURL}
-            />
+            <div className="userProfile">
+                <div>{data.user}</div>
+                <img 
+                    className="userProfilePic"
+                    src={data.userImageURL}
+                />
+                <div>Original uploader</div>
+            </div>
             <Link
                 to={"/"}
                 state={ searchParams }

@@ -1,3 +1,5 @@
+
+
 .imgContainer {
     display: flex;
     align-items: center;
@@ -13,3 +15,69 @@
     width: 150px;
     object-fit: fill;
 }
+
+.emptyResults {
+    display: flex;
+    height: 100px;
+    font-size: x-large;
+    opacity: 0.5;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchInput {
+    margin: 5px;
+    padding: 5px;
+}
+
+.footer {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.imageDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: baseline;
+    padding: 10px;
+}
+
+.uploaderProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.imageDiv {
+    height: 400px;
+    width: 400px;
+    padding: 5px;
+    border: 2px solid black;
+}
+
+.userProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userProfilePic {
+    height: 60px;
+    width: 60px;
+}
+
+.pageNumber {
+    font-size: x-large;
+}
+
