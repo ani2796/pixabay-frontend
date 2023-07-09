@@ -1,6 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-
-.imgContainer {
+/* .imgContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,4 +85,4 @@
 .pageNumber {
     font-size: x-large;
 }
-
+ */

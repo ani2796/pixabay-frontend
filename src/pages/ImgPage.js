@@ -1,6 +1,6 @@
 import { Link, useLoaderData, useLocation } from "react-router-dom";
 
-const Img = () => {
+const ImgPage = () => {
     const data = useLoaderData().data.hits[0];
     // console.log("Image data in img", data);
     // const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Img = () => {
             <img 
                 className="imageDiv"
                 src={data.largeImageURL}
-                alt="Full image"
+                alt="Full resolution img"
             />
             Tags: [{data.tags}]
             <div className="userProfile">
@@ -20,6 +20,7 @@ const Img = () => {
                 <img 
                     className="userProfilePic"
                     src={data.userImageURL}
+                    alt="User profile pic"
                 />
                 <div>Original uploader</div>
             </div>
@@ -35,4 +36,4 @@ const Img = () => {
     );
 }
 
-export { Img };
+export default ImgPage;

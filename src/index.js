@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
-import { Img } from "./Img";
-import { getSingleImgData } from './network';
+import App from './pages/HomePage';
+import './css/index.css';
+import ImgPage from "./pages/ImgPage";
+import { getSingleImgData } from './network/imgData';
 
 import {
   createBrowserRouter,
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/img/:imgId",
-    element: <Img></Img>,
+    element: <ImgPage></ImgPage>,
     loader: getSingleImgData,
   },
 ]);
